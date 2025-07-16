@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Text;
 
 internal class Program
 {
@@ -13,8 +14,16 @@ internal class Program
         Solution sol = new Solution();
         CSStudy cs = new CSStudy();
 
-        Console.WriteLine(sol.Solution0714_3_OXQUIZ(["3 - 4 = -3", "5 + 6 = 11"]));
-        //Console.WriteLine();
+        SortedDictionary<int, string> tmap = new SortedDictionary<int, string>();
+        tmap.Add(1, "asd");
+        tmap.Add(2, "ass");
+        tmap.Add(3, "asf");
+        string s = tmap[1];
+        foreach (var kv in tmap)
+        {
+            int a = kv.Key;
+            string b = kv.Value;
+        }
     }
 
 }

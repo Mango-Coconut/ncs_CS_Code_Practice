@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Formats.Asn1;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 
 class Solution
 {
@@ -379,7 +380,7 @@ class Solution
         return answer;
     }
 
-    //길이에 따른 연상
+    //길이에 따른 연산
     public int Solution0715_7(int[] num_list)
     {
         int answer = 0;
@@ -399,5 +400,46 @@ class Solution
 
         return answer;
     }
+
+
+    // 두 수의 연산값 비교하기
+    public int Solution0716_1(int a, int b)
+    {
+        int answer = 0;
+
+        int c;
+        int.TryParse(a.ToString() + b.ToString(), out c);
+
+        answer = Math.Max(c, 2 * a * b);
+
+        Console.WriteLine(answer);
+        return answer;
+    }
     
+    public string solution(int[] numLog) {
+        string answer = "";
+
+        for (int i = 1; i < numLog.Length; i++)
+        {
+            int minus = numLog[i] - numLog[i - 1];
+            if (minus == 1)
+            {
+                answer += "w";
+            }
+            else if (minus == -1)
+            {
+                answer += "s";
+            }
+            else if (minus == 10)
+            {
+                answer += "d";
+            }
+            else if (minus == -10)
+            {
+                answer += "a";
+            }
+        }
+        
+        return answer;
+    }
 }
