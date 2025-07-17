@@ -9,13 +9,6 @@ class CSStudy
 
     public void HashTableExample()
     {
-        Hashtable ht = new Hashtable();
-        ht.Add("irina", "Irina SP");
-        ht.Add("tom", "Tom Cr");
-
-        if (ht.Contains("tom"))
-        {
-            Console.WriteLine(ht["tom"]);
-        }
+        int[,] ints = { { 1, 2 }, { 3, 4 } };
     }
 }

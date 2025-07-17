@@ -3,6 +3,7 @@ using System.Formats.Asn1;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Windows.Markup;
 
 class Solution
 {
@@ -415,31 +416,180 @@ class Solution
         Console.WriteLine(answer);
         return answer;
     }
-    
-    public string solution(int[] numLog) {
-        string answer = "";
 
-        for (int i = 1; i < numLog.Length; i++)
+    //주사위 3
+    public int Solution250717(int a, int b, int c, int d)
+    {
+        int answer = 0;
+        int equalNum = 1;
+        int p = -1;
+        int q = -1;
+        int r = -1;
+        int s = -1;
+        //원본 숫자 리스트
+        List<int> ints = new List<int>();
+        //해당 원본 숫자의 갯수 리스트
+        List<int> intsnum = new List<int>();
+
+        ints.Add(a); ints.Add(b); ints.Add(c); ints.Add(d);
+        intsnum.Add(a); intsnum.Add(b); intsnum.Add(c); intsnum.Add(d);
+
+        //같은 숫자가 몇개나 있는지
+        for (int i = 0; i < ints.Count; i++)
         {
-            int minus = numLog[i] - numLog[i - 1];
-            if (minus == 1)
+            intsnum[i] = ints.Count(x => x == ints[i]);
+            if (intsnum[i] == 4)
             {
-                answer += "w";
+                equalNum = 4;
             }
-            else if (minus == -1)
+            else if (intsnum[i] == 3)
             {
-                answer += "s";
+                equalNum = 3;
             }
-            else if (minus == 10)
+            else if (intsnum[i] == 2)
             {
-                answer += "d";
+                equalNum = 2;
             }
-            else if (minus == -10)
+        }
+
+        //p,q,r,s 구하고 answer 구하기
+
+        //4개가 모두 같으면
+        if (equalNum == 4)
+        {
+            answer = 1111 * a;
+        }
+        //3개만 같다면 3개는 p, 1개는 q
+        else if (equalNum == 3)
+        {
+            for (int i = 0; i < ints.Count; i++)
             {
-                answer += "a";
+                if (intsnum[i] == 3)
+                {
+                    p = ints[i];
+                }
+                else if (intsnum[i] == 1)
+                {
+                    q = ints[i];
+                }
+            }
+            answer = (10 * p + q) * (10 * p + q);
+        }
+        else if (equalNum == 2)
+        {
+            for (int i = 0; i < ints.Count; i++)
+            {
+                //한개짜리일때
+                if (intsnum[i] == 1)
+                {
+                    //p는 냅두고 q먼저 넣음
+                    if (q == -1)
+                    {
+                        q = ints[i];
+                    }
+                    //q가 이미 있다면 r
+                    else if (q != -1)
+                    {
+                        r = ints[i];
+                    }
+                }
+                //두개짜리면 일단 p
+                else if (intsnum[i] == 2)
+                {
+                    //일단 첫번째건 p
+                    if (p == -1)
+                    {
+                        p = ints[i];
+                        Console.WriteLine($"p = -1, {p}, {q}");
+                    }
+                    //두번째건 q
+                    else if (ints[i] != p)
+                    {
+                        q = ints[i];
+                    }
+                }
+            }
+            //두개 두개(p,q)일 경우
+            if (r == -1)
+            {
+                answer = (p + q) * Math.Abs(p - q);
+            }
+            //두개 한개 한개(p,q,r일 경우)
+            else if (r != -1)
+            {
+                answer = q * r;
+            }
+        }
+        else if (equalNum == 1)
+        {
+            answer = Math.Min(Math.Min(a, b), Math.Min(c, d));
+        }
+
+        return answer;
+    }
+
+    //정수를 나선형으로 배치하기
+    public int[,] Solution250717_2(int n)
+    {
+        int[,] answer = new int[n, n];
+        int i = 1;
+        string dir = "right";
+        int row = 0;
+        int col = 0;
+        int rot = 0;
+
+        answer[row, col] = 1;
+
+        for (i = 1; i < n*n;)
+        {
+            if (dir == "right")
+            {
+                for (col += 1; col < n - rot; col++)
+                {
+                    answer[row, col] = i + 1;
+                    i++;
+                }
+                col--;
+                dir = "down";
+
+            }
+            if (dir == "down")
+            {
+                for (row += 1; row < n - rot; row++)
+                {
+                    answer[row, col] = i + 1;
+                    i++;
+                }
+                row--;
+                dir = "left";
+            }
+            else if (dir == "left")
+            {
+                for (col -= 1; col >= rot; col--)
+                {
+                    answer[row, col] = i + 1;
+                    i++;
+                }
+                col++;
+                dir = "up";
+            }
+            else if (dir == "up")
+            {
+                for (row -= 1; row > rot; row--)
+                {
+                    answer[row, col] = i + 1;
+                    i++;
+                }
+                dir = "right";
+                row++;
+                rot++;
             }
         }
         
+        foreach (int m in answer)
+        {
+            Console.Write($"{m}, ");
+        }
         return answer;
     }
 }
