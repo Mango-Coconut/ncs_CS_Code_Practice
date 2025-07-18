@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Formats.Asn1;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices.Marshalling;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Windows.Markup;
@@ -540,7 +541,7 @@ class Solution
 
         answer[row, col] = 1;
 
-        for (i = 1; i < n*n;)
+        for (i = 1; i < n * n;)
         {
             if (dir == "right")
             {
@@ -585,11 +586,33 @@ class Solution
                 rot++;
             }
         }
-        
+
         foreach (int m in answer)
         {
             Console.Write($"{m}, ");
         }
         return answer;
     }
+
+    public string[] solution(string[] strArr) {
+        string[] answer = new string[] {};
+
+        for (int i = 0; i < strArr.Length; i++)
+        {
+            if (i % 2 == 1)
+            {
+                strArr[i] = strArr[i].ToUpper();
+            }
+            else
+            {
+                strArr[i] = strArr[i].ToLower();
+            }
+        }
+
+        return strArr;
+    }
 }
+
+
+//using System.Collections.Generic;
+//using System.Linq;
