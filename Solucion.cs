@@ -1,5 +1,7 @@
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.Formats.Asn1;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.Marshalling;
 using System.Security.Cryptography.X509Certificates;
@@ -594,22 +596,51 @@ class Solution
         return answer;
     }
 
-    public string[] solution(string[] strArr) {
-        string[] answer = new string[] {};
+    public string solution(string a, string b)
+    {
+        StringBuilder answer = new StringBuilder();
+        int shortLength = Math.Min(a.Length, b.Length);
+        int longLength = Math.Max(a.Length, b.Length);
+        int num;
+        bool isOlim = false;
 
-        for (int i = 0; i < strArr.Length; i++)
+        a = new string(a.Reverse().ToArray());
+        b = new string(b.Reverse().ToArray());
+
+        for (int i = 0; i < longLength; i++)
         {
-            if (i % 2 == 1)
+            num = 0;
+            if (i < shortLength)
             {
-                strArr[i] = strArr[i].ToUpper();
+                num += (a[i] - '0') + (b[i] - '0');
             }
-            else
+            else if (i >= shortLength && a.Length > b.Length)
             {
-                strArr[i] = strArr[i].ToLower();
+                num = a[i] - '0';
             }
-        }
+            else if (i >= shortLength && b.Length > a.Length)
+            {
+                num = b[i] - '0';
+            }
 
-        return strArr;
+            if (isOlim)
+            {
+                num++;
+                isOlim = false;
+            }
+            if (num >= 10)
+            {
+                num -= 10;
+                isOlim = true;
+            }
+            answer.Insert(0, num);
+        }
+        
+        if (isOlim)
+        {
+            answer.Insert(0, 1);
+        }
+        return answer.ToString();
     }
 }
 
