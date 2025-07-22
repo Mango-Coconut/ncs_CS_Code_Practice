@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Formats.Asn1;
 using System.Globalization;
+using System.Net;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.Marshalling;
 using System.Security.Cryptography.X509Certificates;
@@ -596,54 +597,19 @@ class Solution
         return answer;
     }
 
-    public string solution(string a, string b)
+    // List<int> answer = new List<int>();
+    public long solution(int price, int money, int count)
     {
-        StringBuilder answer = new StringBuilder();
-        int shortLength = Math.Min(a.Length, b.Length);
-        int longLength = Math.Max(a.Length, b.Length);
-        int num;
-        bool isOlim = false;
-
-        a = new string(a.Reverse().ToArray());
-        b = new string(b.Reverse().ToArray());
-
-        for (int i = 0; i < longLength; i++)
+        long allPrice = 0;
+        for (int i = 1; i <= count; i++)
         {
-            num = 0;
-            if (i < shortLength)
-            {
-                num += (a[i] - '0') + (b[i] - '0');
-            }
-            else if (i >= shortLength && a.Length > b.Length)
-            {
-                num = a[i] - '0';
-            }
-            else if (i >= shortLength && b.Length > a.Length)
-            {
-                num = b[i] - '0';
-            }
-
-            if (isOlim)
-            {
-                num++;
-                isOlim = false;
-            }
-            if (num >= 10)
-            {
-                num -= 10;
-                isOlim = true;
-            }
-            answer.Insert(0, num);
+            allPrice += price * i;
         }
-        
-        if (isOlim)
-        {
-            answer.Insert(0, 1);
-        }
-        return answer.ToString();
+        return -1;
     }
 }
 
 
 //using System.Collections.Generic;
 //using System.Linq;
+//using System.Text;
