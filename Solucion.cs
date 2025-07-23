@@ -598,14 +598,17 @@ class Solution
     }
 
     // List<int> answer = new List<int>();
-    public long solution(int price, int money, int count)
-    {
-        long allPrice = 0;
-        for (int i = 1; i <= count; i++)
+    public int[] solution(int[] array, int[,] commands) {
+        int[] answer = new int[commands.GetLength(0)];
+        for (int i = 0; i < commands.GetLength(0); i++)
         {
-            allPrice += price * i;
+            int cutStart = commands[i, 0];
+            int cutLength = commands[i, 1] - cutStart;
+            List<int> cutList = array.ToList().GetRange(cutStart, cutLength);
+            cutList.Sort();
+            answer[i] = cutList[commands[i,2]];
         }
-        return -1;
+        return answer;
     }
 }
 
