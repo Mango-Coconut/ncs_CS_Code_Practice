@@ -11,17 +11,7 @@ internal class Program
         CSStudy cs = new CSStudy();
 
 
-        Console.Write($"{GetNumber()}, ");
-        Console.Write($"{GetNumber()}, ");
-        Console.Write($"{GetNumber()}, ");
-        /*
-        foreach (int i in GetNumber())
-        {
-            Console.Write($"{i}, ");
-        }
-        Console.WriteLine();
-        Console.WriteLine(GetNumber().ToArray()[0]);
-        */
+        cs.ExceptionSample();
     }
 
     static IEnumerable<int> GetNumber()

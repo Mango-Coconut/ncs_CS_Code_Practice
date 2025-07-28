@@ -14,17 +14,28 @@ class CSStudy
         Left = 8
     }
     public void EnumExample()
-{
-
-    Border b = Border.Top | Border.Bottom;
-    if ((b & Border.Top) != 0)
     {
-        if (b.HasFlag(Border.Bottom))
+
+        Border b = Border.Top | Border.Bottom;
+        if ((b & Border.Top) != 0)
         {
-            Console.WriteLine(b.ToString());
+            if (b.HasFlag(Border.Bottom))
+            {
+                Console.WriteLine(b.ToString());
+            }
         }
     }
-}
 
-    
+    public void ExceptionSample() {
+        int[] intArr = new int[3];
+        try
+        {
+            intArr[5] = 0;
+        }
+        catch (ArgumentException ex)
+        {
+            Console.WriteLine(ex);
+        }
+        
+    }
 }
