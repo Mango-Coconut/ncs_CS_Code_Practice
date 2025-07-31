@@ -598,27 +598,7 @@ class Solution
     }
 
     // List<int> answer = new List<int>();
-    public int[] solution(int brown, int yellow) {
-        double w;
-        double h;
-        
-        //w * h = brown+yellow;
-        //brown = w*h - (w-2) * (h-2)
-        
-        //brown = 2*w + 2*h - 4;
-        //2h = 2w-4 - brown;
-        //h = w-2-brown/2;
-        //w*w + -(2+brown/2)*w + -(brown+yellow);
-        
-        //x = (-b ± √(b² - 4ac)) / 2a
-        //yellow = w*h - 2*w - 2*h + 4;
-        
-        w = (2+brown/2 + Math.Sqrt(2*((2+brown/2)) +4*(brown+yellow))) / 2;
-        h = (2+brown/2 - Math.Sqrt(2*((2+brown/2)) +4*(brown+yellow))) / 2;
-        
-        int[] answer = new int[2] {(int)w, (int)h};
-        return answer;
-    }
+    
 }
 
 
